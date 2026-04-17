@@ -1,0 +1,20 @@
+Bibliothèque en ligne UASZ
+
+Ce projet consiste à développer une application web en OCaml permettant la gestion et le partage de documents administratifs.
+
+L’application a été développée en utilisant le framework Dream pour la gestion des requêtes HTTP. Les données sont stockées dans une base SQLite, ce qui permet une gestion simple et efficace des utilisateurs et des documents.
+
+Le système implémente une authentification utilisateur avec stockage sécurisé des mots de passe grâce à une fonction de hachage (Digestif). Les sessions sont gérées afin de sécuriser l’accès aux routes protégées.
+
+Les documents sont décrits à l’aide de métadonnées (titre, description, auteur, catégorie, etc.) et sont stockés dans le système de fichiers, tandis que leurs références sont enregistrées dans la base de données.
+
+Le projet est structuré en plusieurs modules :
+- types.ml : définition des structures de données
+- db.ml : gestion de la base de données
+- auth.ml : gestion de la sécurité
+- documents.ml : gestion des documents
+- main.ml : serveur web et API REST
+
+Des tests ont été réalisés avec Alcotest pour vérifier certaines fonctionnalités comme le hachage des mots de passe.
+
+Ce projet répond aux exigences demandées en proposant une architecture backend fonctionnelle, une gestion des données structurée et une API REST sécurisée.
