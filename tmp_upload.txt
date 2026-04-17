@@ -1,0 +1,38 @@
+let upload_document req _email _role =
+  match%lwt Dream.form ~csrf:false req with
+  | `Ok form
+  | `Expired (form, _)
+  | `Wrong_session form ->
+      let find name =
+        List.assoc_opt name form
+      in
+      begin match
+        find "titre",
+        find "description",
+        find "auteur",
+        find "categorie",
+        find "nom_fichier",
+        Dream.session_field req "user_id"
+      with
+      | Some titre, Some description, Some auteur, Some categorie, Some nom_fichier, Some user_id ->
+          let safe_name = Filename.basename nom_fichier in
+          let path = "storage/" ^ safe_name in
+          Utils.write_file path "Fichier placeholder";
+          Db.add_document
+            ~titre
+            ~description
+            ~auteur
+            ~categorie
+            ~nom_fichier:safe_name
+            ~chemin_fichier:path
+            ~proprietaire_id:(int_of_string user_id)
+            ~date_ajout:(Utils.now_string ());
+          json_response (`Assoc [("message", `String "Document ajouté avec succès")])
+      | _ ->
+          bad_request "Champs manquants pour l'ajout du document"
+      end
+  | `Invalid_token _
+  | `Missing_token _
+  | `Many_tokens _
+  | `Wrong_content_type ->
+      bad_request "Formulaire invalide"

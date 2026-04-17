@@ -1,0 +1,5 @@
+(executable
+ (name main)
+ (public_name bibliotheque_uasz)
+ (modules main)
+ (libraries bibliotheque_uasz dream yojson sqlite3 digestif unix lwt))

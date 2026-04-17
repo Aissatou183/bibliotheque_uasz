@@ -1,0 +1,4 @@
+(test
+ (name test_bibliotheque)
+ (modules test_bibliotheque)
+ (libraries bibliotheque_uasz alcotest yojson))

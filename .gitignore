@@ -1,0 +1,7 @@
+_build/
+*.install
+*.opam
+*.user-setup.sexp
+data/*.db
+storage/*
+!storage/.gitkeep

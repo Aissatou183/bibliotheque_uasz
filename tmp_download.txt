@@ -1,0 +1,6 @@
+let download_document req =
+  let id = int_of_string (Dream.param req "id") in
+  let docs = Db.list_documents () in
+  match List.find_opt (fun d -> d.id = id) docs with
+  | None -> Dream.empty `Not_Found
+  | Some d -> Dream.from_filesystem req d.chemin_fichier

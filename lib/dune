@@ -1,0 +1,4 @@
+(library
+ (name bibliotheque_uasz)
+ (modules types db auth documents utils)
+ (libraries yojson sqlite3 digestif unix))
